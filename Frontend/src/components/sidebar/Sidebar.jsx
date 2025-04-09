@@ -5,11 +5,16 @@ import LogoutButton from './LogoutButton'
 
 const Sidebar = () => {
   return (
-    <div className='border-r border-slate-500 p-4 flex flex-col'>
-      <SearchInput/>
+    <div className='flex flex-col h-full border-r border-slate-500 p-4'>
+     <div className='w-full'> <SearchInput /></div>
       <div className='divider px-3'></div>
-      <Conversations/>
-      <LogoutButton/>
+
+      {/* Scrollable area */}
+      <div className='flex-1 overflow-y-auto'>
+        <Conversations />
+      </div>
+
+      <LogoutButton />
     </div>
   )
 }

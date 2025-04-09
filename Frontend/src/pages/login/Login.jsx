@@ -1,60 +1,80 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
-
     const [username, setUsername] = useState("");
-    const [password,setPassword] = useState('')
+    const [password, setPassword] = useState('');
 
-    const {loading, login} = useLogin()
+    const { loading, login } = useLogin();
 
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(username,password)
-    }
-  return (
-    <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-        <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-            <h1 className='text-3xl font-semibold text-center text-gray-300'>
-                Login 
-                <span className='text-blue-500'> C<span className=' text-gray-300'>onnect</span>IT</span>
-            </h1>
+        await login(username, password);
+    };
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label className='label p-2'>
-                        <span className='text-base label-text'>Username</span>
-                    </label>
-                    <input type="text" placeholder='Enter your name' className='w-full input input-bordered h-10' 
-                    value={username}
-                    onChange={(e)=>setUsername(e.target.value)}/>
-                </div>
+    return (
+        <div className="flex items-center justify-center min-h-screen px-4">
+            <div className="w-full max-w-md p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
+                <h1 className="text-3xl font-semibold text-center text-gray-300 mb-6">
+                    Login 
+                    <span className="text-blue-500">
+                        C<span className="text-gray-300">onnect</span>IT
+                    </span>
+                </h1>
 
-                <div>
-                    <label className='label'>
-                        <span className='text-base label-text'>Password</span>
-                    </label>
-                    <input type="password" placeholder='Enter Password' className='w-full input input-bordered h-10' 
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}/>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1 text-gray-200">
+                            Username
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Enter your name"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-black"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
 
-                <Link to={'/signup'} className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block' >
-                    {"Don't"} have an account
-                </Link>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1 text-gray-200">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-black"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
 
-                <div>
-                    <button className='btn btn-block btn-sm mt-2'
-                    disabled={loading} >
-                        {loading ? <span className='loading loading-spinner'></span> : 'Login'}
-                    </button>
-                </div>
-            </form>
+                    <div className="text-sm mb-4">
+                        <Link
+                            to="/signup"
+                            className="text-blue-500 hover:underline"
+                        >
+                            Don't have an account?
+                        </Link>
+                    </div>
 
+                    <div>
+                        <button
+                            className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 disabled:opacity-50"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <span className="loading loading-spinner"></span>
+                            ) : (
+                                'Login'
+                            )}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Login
+export default Login;
